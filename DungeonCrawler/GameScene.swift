@@ -11,27 +11,23 @@ import GameplayKit
 
 class GameScene: SKScene {
     
+    
     var upButtonIsPressed = false
     var downButtonIsPressed = false
     var leftButtonIsPressed = false
     var rightButtonIsPressed = false
+    
+    
     
     let cam = SKCameraNode()
     var playerCharacter: SKSpriteNode!
     var platform = SKTileMapNode()
     var gridGraph = GKGridGraph()
     var isMoveButtonPressed = false
-    var leftButton = Button(defaultButtonImage: "roman", activeButtonImage: "roman", buttonAction: {
-    })
-    var rightButton = Button(defaultButtonImage: "roman", activeButtonImage: "roman", buttonAction: {
-        let moveDirection = MovementDirection.right
-    })
-    var upButton = Button(defaultButtonImage: "roman", activeButtonImage: "roman", buttonAction: {
-        let moveDirection = MovementDirection.up
-    })
-    var downButton = Button(defaultButtonImage: "roman", activeButtonImage: "roman", buttonAction: {
-        let moveDirection = MovementDirection.left
-    })
+    var leftButton: Button
+    var rightButton: Button
+    var upButton: Button
+    var downButton: Button
     
     enum MovementDirection: Int {
         case up = 1
@@ -41,16 +37,16 @@ class GameScene: SKScene {
     }
     
     func loadButtonNodes() {
-//        upButton.position = CGPoint(x: (self.frame.midX - (self.frame.midX / 2)), y: (self.frame.midY - (self.frame.midY / 2)) + 12)
-//        rightButton.position = CGPoint(x: (self.frame.midX - (self.frame.midX / 2)) + 12, y: self.frame.midY - (self.frame.midY / 2))
-//        downButton.position = CGPoint(x: (self.frame.midX - (self.frame.midX / 2)), y: (self.frame.midY - (self.frame.midY / 2)) - 12)
-//        leftButton.position = CGPoint(x: (self.frame.midX - (self.frame.midX / 2)) - 12, y: self.frame.midY - (self.frame.midY / 2))
+        upButton.position = Button(defaultButtonImage: "roman", activeButtonImage: "roman")
+        rightButton.position = Button(defaultButtonImage: "roman", activeButtonImage: "roman")
+        downButton.position = Button(defaultButtonImage: "roman", activeButtonImage: "roman")
+        leftButton = Button(defaultButtonImage: "roman", activeButtonImage: "roman")
         
         upButton.position = CGPoint(x: 250,y: 200)
         addChild(upButton)
-       // addChild(rightButton)
-        //addChild(downButton)
-       // addChild(leftButton)
+        addChild(rightButton)
+        addChild(downButton)
+        addChild(leftButton)
     }
     
     
@@ -95,12 +91,13 @@ class GameScene: SKScene {
         loadSceneNodes()
         self.camera = cam
         
+        
     }
     
         
     
     
-    func movePlayerInDirection(direction: Direction) {
+    func movePlayerInDirection(direction: MovementDirection) {
         
         var xMove = CGFloat()
         var yMove = CGFloat()
@@ -128,45 +125,46 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         cam.position = playerCharacter.position
+        if leftButtonIsPre
     }
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-////        if let touch = touches.first {
-////            if leftButton.contains(touch.location(in: self)) {
-////                leftButtonIsPressed = true
-////            }
-////            if rightButton.contains(touch.location(in: self)) {
-////                rightButtonIsPressed = true
-////            }
-////            if upButton.contains(touch.location(in: self)) {
-////                upButtonIsPressed = true
-////            }
-////            if downButton.contains(touch.location(in: self)) {
-////                downButtonIsPressed = true
-////            }
-////        }
-//    }
-//
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//
-//    }
-//
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-////        if let touch = touches.first {
-////            if leftButton.contains(touch.location(in: self)) {
-////                leftButtonIsPressed = false
-////            }
-////            if rightButton.contains(touch.location(in: self)) {
-////                rightButtonIsPressed = false
-////            }
-////            if upButton.contains(touch.location(in: self)) {
-////                upButtonIsPressed = false
-////            }
-////            if downButton.contains(touch.location(in: self)) {
-////                downButtonIsPressed = false
-////            }
-////        }
-//    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            if leftButton.contains(touch.location(in: self)) {
+                leftButtonIsPressed = true
+            }
+            if rightButton.contains(touch.location(in: self)) {
+                rightButtonIsPressed = true
+            }
+            if upButton.contains(touch.location(in: self)) {
+                upButtonIsPressed = true
+            }
+            if downButton.contains(touch.location(in: self)) {
+                downButtonIsPressed = true
+            }
+        }
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            if leftButton.contains(touch.location(in: self)) {
+                leftButtonIsPressed = false
+            }
+            if rightButton.contains(touch.location(in: self)) {
+                rightButtonIsPressed = false
+            }
+            if upButton.contains(touch.location(in: self)) {
+                upButtonIsPressed = false
+            }
+            if downButton.contains(touch.location(in: self)) {
+                downButtonIsPressed = false
+            }
+        }
+    }
     
     
     var touches = Set<UITouch>()

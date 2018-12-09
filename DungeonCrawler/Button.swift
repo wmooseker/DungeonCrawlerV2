@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class Button: SKNode {
+class Button: SKSpriteNode {
     var defaultButtonSprite = SKSpriteNode()
     var activeButtonSprite = SKSpriteNode()
     var action: () -> Void
@@ -27,24 +27,11 @@ class Button: SKNode {
    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
     }
-//    override func update() {
-//        if leftButtonIsPressed == true {
-//            let moveDirection = Direction.left
-//            movePlayerInDirection(direction: moveDirection)
-//        }
-//        if rightButtonIsPressed == true {
-//            let moveDirection = Direction.right
-//            movePlayerInDirection(direction: moveDirection)
-//        }
-//        if upButtonIsPressed == true {
-//            let moveDirection = Direction.up
-//            movePlayerInDirection(direction: moveDirection)
-//        }
-//        if downButtonIsPressed == true {
-//            let moveDirection = Direction.down
-//            movePlayerInDirection(direction: moveDirection)
-//        }
-//    }
+
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
